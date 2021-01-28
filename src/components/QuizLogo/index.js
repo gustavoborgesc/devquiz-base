@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function Logo({ className }) {
     return (
@@ -11,8 +11,7 @@ function Logo({ className }) {
             height="67"
             viewBox="0 0 135 67"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
+            xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0)">
                 <mask
                     id="path-1-outside-1"
@@ -21,8 +20,7 @@ function Logo({ className }) {
                     y="2"
                     width="110"
                     height="50"
-                    fill="black"
-                >
+                    fill="black">
                     <rect fill="white" x="2" y="2" width="110" height="50" />
                     <path
                         fillRule="evenodd"
