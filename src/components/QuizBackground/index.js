@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const QuizBackground = styled.div`
     width: 100%;
@@ -10,13 +10,10 @@ const QuizBackground = styled.div`
     @media screen and (max-width: 500px) {
         background-image: none;
         &:after {
-            content: "";
+            content: '';
             background-size: cover;
             background-position: center;
-            background-image: linear-gradient(
-                    transparent,
-                    ${({ theme }) => theme.colors.mainBg}
-                ),
+            background-image: linear-gradient(transparent, ${({ theme }) => theme.colors.mainBg}),
                 url(${({ backgroundImage }) => backgroundImage});
             display: block;
             width: 100%;
