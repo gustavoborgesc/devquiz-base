@@ -24,7 +24,7 @@ module.exports = {
         indent: ['error', 4, { SwitchCase: 1 }],
         'react/jsx-indent': ['error', 4],
         'react/jsx-indent-props': ['error', 4],
-        'react/jsx-props-no-spreading': ['error', { custom: 'ignore' }],
+        'react/jsx-props-no-spreading': 'off', // ['error', { custom: 'ignore' }]
         'react/jsx-one-expression-per-line': [1, { allow: 'single-child' }],
         'react/prop-types': 'off',
         'react/react-in-jsx-scope': 'off',
