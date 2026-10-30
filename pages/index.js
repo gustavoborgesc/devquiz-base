@@ -24,7 +24,7 @@ export default function Home() {
     const handlerChange = (event) => setName(event.target.value.trim());
 
     return (
-        <QuizBackground backgroundImage={db.bg}>
+        <QuizBackground $backgroundImage={db.bg}>
             <QuizContainer>
                 <QuizLogo />
                 <Widget
