@@ -140,9 +140,9 @@ export default function Quiz({ db, username }) {
     const question = db.questions[currentQuestion];
     const totalQuestions = db.questions.length;
 
-    function addResult(result) {
+    const addResult = (result) => {
         setResults([...results, result]);
-    }
+    };
 
     React.useEffect(() => {
         setTimeout(() => {
@@ -160,10 +160,10 @@ export default function Quiz({ db, username }) {
     };
 
     return (
-        <QuizBackground backgroundImage={db.bg}>
+        <QuizBackground $backgroundImage={db.bg}>
             <QuizContainer>
                 <QuizLogo />
-                {screenState === screenStates.QUIZ && (
+                {screenState === screenStates.QUIZ && question && (
                     <QuestionWidget
                         question={question}
                         questionIndex={currentQuestion}
@@ -171,6 +171,15 @@ export default function Quiz({ db, username }) {
                         onSubmit={handleSubmitQuiz}
                         addResult={addResult}
                     />
+                )}
+
+                {screenState === screenStates.QUIZ && !question && (
+                    <Widget>
+                        <Widget.Header>
+                            <BackLinkArrow href="/" />
+                            Não foi possível carregar as perguntas.
+                        </Widget.Header>
+                    </Widget>
                 )}
 
                 {screenState === screenStates.LOADING && <LoadingWidget />}
@@ -185,11 +194,27 @@ export default function Quiz({ db, username }) {
     );
 }
 
+function resolveOrigin(req) {
+    const host = req.headers.host || 'localhost:3000';
+    const forwardedProto = req.headers['x-forwarded-proto'];
+
+    if (typeof forwardedProto === 'string' && forwardedProto.length > 0) {
+        return `${forwardedProto.split(',')[0].trim()}://${host}`;
+    }
+
+    const { referer } = req.headers;
+    if (typeof referer === 'string' && referer.includes('://')) {
+        return `${referer.split('://')[0]}://${host}`;
+    }
+
+    return `http://${host}`;
+}
+
 export async function getServerSideProps(context) {
-    const { req } = context;
-    const protocol = req.headers.referer.split('://')[0];
-    const { host } = req.headers;
-    const url = `${protocol}://${host}/api/db`;
+    const { req, query } = context;
+    const url = `${resolveOrigin(req)}/api/db`;
+    const { name } = query;
+    const username = typeof name === 'string' ? name : '';
     const db = await fetch(url)
         .then((response) => {
             if (response.ok) {
@@ -202,12 +227,13 @@ export async function getServerSideProps(context) {
         })
         .catch((error) => {
             console.log(error);
+            return { questions: [], bg: '' };
         });
 
     return {
         props: {
             db,
-            username: context.query.name,
+            username,
         },
     };
 }

@@ -27,6 +27,13 @@ module.exports = {
         'react/jsx-props-no-spreading': 'off', // ['error', { custom: 'ignore' }]
         'react/jsx-one-expression-per-line': [1, { allow: 'single-child' }],
         'react/prop-types': 'off',
+        'react/require-default-props': [
+            'error',
+            {
+                forbidDefaultForRequired: true,
+                functions: 'defaultArguments',
+            },
+        ],
         'react/react-in-jsx-scope': 'off',
         'jsx-a11y/anchor-is-valid': 'off',
         'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],

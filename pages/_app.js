@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex-direction: column;
     font-family: 'Lato', sans-serif;
-    // Deixa branco no começo
+    /* Deixa branco no começo */
     color: ${({ theme: _theme }) => _theme.colors.contrastText};
   }
   html, body {
